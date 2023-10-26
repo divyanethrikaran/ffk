@@ -15,14 +15,20 @@ import { CommonModule } from '@angular/common';
 })
 export class TableComponentComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  columnDefinitions = [
+    { name: 'position', header: 'No.' },
+    { name: 'name', header: 'Name' },
+    { name: 'weight', header: 'Weight' },
+    { name: 'symbol', header: 'Symbol' },
+  ];
+  columnNames = this.columnDefinitions.map((column) => column.name);
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   isPaginationVisible = true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  
-  constructor(private _liveAnnouncer: LiveAnnouncer) {}
+
+  constructor() {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
